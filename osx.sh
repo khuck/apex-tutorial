@@ -7,6 +7,7 @@ rm -rf build
 
 # Configure
 cmake -B build \
+ -DKokkos_ENABLE_PTHREAD=ON
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \
@@ -14,4 +15,4 @@ cmake -B build \
 
 # Build
 cmake --build build -j
-ctest -V --test-dir build
+ctest --test-dir build
