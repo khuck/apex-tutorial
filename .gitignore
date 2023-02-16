@@ -34,3 +34,9 @@
 # directories
 build
 install
+
+# APEX output
+*.csv
+*.txt
+*.pdf
+*.dot

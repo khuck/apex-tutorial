@@ -18,3 +18,6 @@ cmake --build build -j
 # Test
 ctest --test-dir build
 ```
+
+For clues on which Kokkos architectures are available, see
+`kokkos/cmake/kokkos_arch.cmake`.
