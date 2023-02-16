@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 find_package(APEX REQUIRED)
 find_package(MPI) # optional
-find_package(OpenMP)
+find_package(OpenMP) # optional
 
 include_directories(${APEX_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
