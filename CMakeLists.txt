@@ -13,5 +13,9 @@ find_package(APEX REQUIRED)
 include_directories(${APEX_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
 
-add_subdirectory(src/C++/std_thread)
+enable_testing()
 
+add_custom_target(tests)
+add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
+
+add_subdirectory(src/C++/std_thread)

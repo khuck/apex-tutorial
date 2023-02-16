@@ -14,3 +14,4 @@ cmake -B build \
 
 # Build
 cmake --build build -j
+ctest --test-dir build
