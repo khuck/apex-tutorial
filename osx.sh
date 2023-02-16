@@ -7,8 +7,10 @@ rm -rf build
 
 # Configure
 cmake -B build \
--DKokkos_ENABLE_PTHREAD=ON
+-DKokkos_ENABLE_THREADS=ON \
+-DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ARCH_NATIVE=ON \
+-DKokkos_ARCH_INTEL_DG1=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=ON \
 
@@ -17,5 +19,5 @@ cmake -B build \
 #-DAPEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
 
 # Build
-cmake --build build -j
+cmake --build build -j8
 ctest --test-dir build
