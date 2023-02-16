@@ -21,5 +21,5 @@ cmake -B build \
 #-DAPEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
 
 # Build
-cmake --build build -j
+cmake --build build -j16
 ctest --test-dir build
