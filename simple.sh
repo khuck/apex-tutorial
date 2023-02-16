@@ -1,6 +1,3 @@
-export CXX=`which amdclang++`
-export CC=`which amdclang`
-export APEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
 
 # clean up
 rm -rf build
