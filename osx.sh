@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 export CXX=`which clang++`
 export CC=`which clang`
 export APEX_ROOT=$HOME/src/apex/install

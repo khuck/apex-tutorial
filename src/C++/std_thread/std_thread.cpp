@@ -3,8 +3,9 @@
 #include <vector>
 #include <iostream>
 #include <unistd.h>
+#include "std_thread.hpp"
 
-constexpr size_t nthreads{3};
+const size_t nthreads{std::thread::hardware_concurrency()};
 
 void doWork(int scale = 1) {
     constexpr size_t sleep_us{100000};
@@ -12,8 +13,12 @@ void doWork(int scale = 1) {
 }
 
 int foo(int tid) {
+    static std::mutex mtx;
+    {
+        std::scoped_lock lock(mtx);
+        std::cout << __func__ << "Thread " << tid << " working!" << std::endl;
+    }
     // "do some work"
-    std::cout << "Thread " << tid << " working!" << std::endl;
     doWork(tid);
     return 1;
 }
@@ -32,6 +37,8 @@ int someThread(int tid)
 }
 
 int main (int argc, char** argv) {
+    UNUSED(argc);
+    UNUSED(argv);
     // "do some work"
     doWork();
     // create threads to work asynchronously

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <unistd.h>
 
-constexpr size_t nthreads{3};
+const size_t nthreads{std::thread::hardware_concurrency()};
 
 void doWork(int scale = 1, std::shared_ptr<apex::task_wrapper> parent = nullptr) {
     auto task = apex::scoped_timer(__func__, parent);
@@ -15,8 +15,12 @@ void doWork(int scale = 1, std::shared_ptr<apex::task_wrapper> parent = nullptr)
 
 int foo(int tid, std::shared_ptr<apex::task_wrapper> parent) {
     auto task = apex::scoped_timer(__func__, parent);
+    static std::mutex mtx;
+    {
+        std::scoped_lock lock(mtx);
+        std::cout << __func__ << "Thread " << tid << " working!" << std::endl;
+    }
     // "do some work"
-    std::cout << "Thread " << tid << " working!" << std::endl;
     doWork(tid, task.get_task_wrapper());
     return 1;
 }

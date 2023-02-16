@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR}/src/C++/common)
+add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 add_executable(std_thread_cpp std_thread.cpp)
 target_link_libraries (std_thread_cpp pthread)

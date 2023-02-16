@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 export CXX=`which nvc++`
 export CC=`which nvc`
 export APEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_nvhpc22.9

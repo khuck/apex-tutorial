@@ -9,6 +9,7 @@ option (WITH_KokkosKernels "Enable Kokkos Kernels examples" TRUE)
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+add_compile_options(-Wall -Wextra -pedantic)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 find_package(APEX REQUIRED)
