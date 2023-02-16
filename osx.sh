@@ -7,7 +7,10 @@ rm -rf build
 
 # Configure
 cmake -B build \
- -DKokkos_ENABLE_PTHREAD=ON
+-DKokkos_ENABLE_PTHREAD=ON
+-DKokkos_ARCH_NATIVE=ON \
+-DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
+-DKokkosKernels_ENABLE_EXAMPLES=ON \
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \

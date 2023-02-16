@@ -13,7 +13,7 @@ cmake -B build \
 -DKokkos_ARCH_ZEN2=ON \
 -DKokkos_ARCH_AMPERE80=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
--DKokkos_ENABLE_TESTS=OFF \
+-DKokkosKernels_ENABLE_EXAMPLES=ON \
 
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \

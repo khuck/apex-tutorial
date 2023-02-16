@@ -19,6 +19,7 @@ enable_testing()
 
 include(cmake/AddGitSubmodule.cmake)
 add_git_submodule(kokkos)
+add_git_submodule(kokkos-kernels)
 
 add_custom_target(tests)
 add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
