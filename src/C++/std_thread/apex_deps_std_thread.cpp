@@ -9,7 +9,7 @@ const size_t nthreads{std::thread::hardware_concurrency()};
 
 void doWork(int scale = 1, std::shared_ptr<apex::task_wrapper> parent = nullptr) {
     auto task = apex::scoped_timer(__func__, parent);
-    constexpr size_t sleep_us{100000};
+    constexpr size_t sleep_us{10000};
     usleep(sleep_us * scale);
 }
 
@@ -18,7 +18,7 @@ int foo(int tid, std::shared_ptr<apex::task_wrapper> parent) {
     static std::mutex mtx;
     {
         std::scoped_lock lock(mtx);
-        std::cout << __func__ << "Thread " << tid << " working!" << std::endl;
+        std::cout << __func__ << " : Thread " << tid << " working!" << std::endl;
     }
     // "do some work"
     doWork(tid, task.get_task_wrapper());

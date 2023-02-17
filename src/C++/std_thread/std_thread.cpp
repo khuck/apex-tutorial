@@ -8,7 +8,7 @@
 const size_t nthreads{std::thread::hardware_concurrency()};
 
 void doWork(int scale = 1) {
-    constexpr size_t sleep_us{100000};
+    constexpr size_t sleep_us{10000};
     usleep(sleep_us * scale);
 }
 
@@ -16,7 +16,7 @@ int foo(int tid) {
     static std::mutex mtx;
     {
         std::scoped_lock lock(mtx);
-        std::cout << __func__ << "Thread " << tid << " working!" << std::endl;
+        std::cout << __func__ << " : Thread " << tid << " working!" << std::endl;
     }
     // "do some work"
     doWork(tid);

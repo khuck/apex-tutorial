@@ -10,6 +10,13 @@ option (WITH_KokkosKernels "Enable Kokkos Kernels examples" TRUE)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_compile_options(-Wall -Wextra -pedantic)
+if(APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS
+        "${CMAKE_EXE_LINKER_FLAGS} -force_flat_namespace -undefined dynamic_lookup")
+    set(CMAKE_SHARED_LINKER_FLAGS
+        "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+
+endif(APPLE)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 find_package(APEX REQUIRED)
