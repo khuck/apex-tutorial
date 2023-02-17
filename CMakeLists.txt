@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.20.1) # Minimum required for CUDA
 project(Tutorial VERSION 1.0)
 
 option (WITH_Kokkos "Enable Kokkos examples" TRUE)
-option (WITH_KokkosKernels "Enable Kokkos Kernels examples" TRUE)
+option (WITH_KokkosKernels "Enable Kokkos Kernels examples" FALSE)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)

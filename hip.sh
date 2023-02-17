@@ -9,6 +9,7 @@ rm -rf build
 
 # Configure
 cmake -B build \
+-DWITH_KokkosKernels=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_HIP=ON \
 -DKokkos_ENABLE_SERIAL=ON \
