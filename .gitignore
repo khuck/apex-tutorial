@@ -37,6 +37,8 @@ install
 
 # APEX output
 *.csv
-*.txt
+tasktree.txt
 *.pdf
 *.dot
+*.json
+*.json.gz
