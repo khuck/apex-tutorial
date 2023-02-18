@@ -24,7 +24,6 @@ THE SOFTWARE.
 
 // hip header file
 #include <hip/hip_runtime.h>
-#include "roctracer_ext.h"
 // roctx header file
 #include <roctx.h>
 // openmp header file
@@ -49,10 +48,6 @@ do {                                                                           \
 #define THREADS_PER_BLOCK_X 4
 #define THREADS_PER_BLOCK_Y 4
 #define THREADS_PER_BLOCK_Z 1
-
-// Mark API
-extern "C"
-void roctracer_mark(const char* str);
 
 // Device (Kernel) function, it must be void
 __global__ void matrixTranspose(float* out, float* in, const int width) {
@@ -93,6 +88,7 @@ int main() {
     int i;
     int errors;
 
+    roctxRangePush("Initialization");
     Matrix = (float*)malloc(NUM * sizeof(float));
     TransposeMatrix = (float*)malloc(NUM * sizeof(float));
     cpuTransposeMatrix = (float*)malloc(NUM * sizeof(float));
@@ -108,6 +104,7 @@ int main() {
     // allocate the memory on the device side
     RUNTIME_API_CALL(hipMalloc((void**)&gpuMatrix, NUM * sizeof(float)));
     RUNTIME_API_CALL(hipMalloc((void**)&gpuTransposeMatrix, NUM * sizeof(float)));
+    roctxRangePop(); // for "Initialization"
 
     uint32_t iterations = ITERATIONS;
     while (iterations-- > 0) {
@@ -118,25 +115,23 @@ int main() {
         RUNTIME_API_CALL(hipMemcpy(gpuMatrix, Matrix, NUM * sizeof(float), hipMemcpyHostToDevice));
         RUNTIME_API_CALL(hipDeviceSynchronize());
 
-        roctracer_mark("before HIP LaunchKernel");
         roctxMark("before hipLaunchKernel");
-        roctxRangePush("hipLaunchKernel");
+        roctxRangePush("LaunchKernel wrapper");
         // Lauching kernel from host
         hipLaunchKernelGGL(matrixTranspose, dim3(WIDTH / THREADS_PER_BLOCK_X, WIDTH / THREADS_PER_BLOCK_Y),
                         dim3(THREADS_PER_BLOCK_X, THREADS_PER_BLOCK_Y), 0, 0, gpuTransposeMatrix,
                         gpuMatrix, WIDTH);
-        roctracer_mark("after HIP LaunchKernel");
         roctxMark("after hipLaunchKernel");
         RUNTIME_API_CALL(hipDeviceSynchronize());
+        roctxRangePop(); // for "hipLaunchKernel"
 
         // Memory transfer from device to host
-        roctxRangePush("hipMemcpy");
+        roctxRangePush("Memcpy wrapper");
 
         RUNTIME_API_CALL(hipMemcpy(TransposeMatrix, gpuTransposeMatrix, NUM * sizeof(float), hipMemcpyDeviceToHost));
         RUNTIME_API_CALL(hipDeviceSynchronize());
 
         roctxRangePop(); // for "hipMemcpy"
-        roctxRangePop(); // for "hipLaunchKernel"
 
         roctxRangePush("Validation Step"); // for "validation"
         // verify the results
@@ -157,6 +152,7 @@ int main() {
         roctxRangeStop(rangeId);
     }
 
+    roctxRangePush("Memory Free");
     // free the resources on device side
     RUNTIME_API_CALL(hipFree(gpuMatrix));
     RUNTIME_API_CALL(hipFree(gpuTransposeMatrix));
@@ -166,6 +162,7 @@ int main() {
     free(Matrix);
     free(TransposeMatrix);
     free(cpuTransposeMatrix);
+    roctxRangePop(); // for "Memory Free"
 
     return errors;
 }
