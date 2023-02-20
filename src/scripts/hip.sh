@@ -15,6 +15,7 @@ cmake -B build \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ARCH_ZEN2=ON \
 -DKokkos_ARCH_VEGA90A=ON \
+-DKokkos_ENABLE_TUNING=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
 -DROCTX_ROOT=/opt/rocm-5.2.0/roctracer \
