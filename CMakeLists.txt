@@ -42,6 +42,7 @@ add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-fai
 add_subdirectory(src/C++/std_thread)
 if (WITH_Kokkos)
     add_subdirectory(src/C++/kokkos)
+    add_subdirectory(src/C++/kokkos-lulesh-2.0)
 endif (WITH_Kokkos)
 
 find_package(ROCTX)

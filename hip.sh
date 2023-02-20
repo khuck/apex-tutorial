@@ -17,7 +17,7 @@ cmake -B build \
 -DKokkos_ARCH_VEGA90A=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
--DROCTX_ROOT=/opt/rocm-5.2.0/roctracer
+-DROCTX_ROOT=/opt/rocm-5.2.0/roctracer \
 
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
