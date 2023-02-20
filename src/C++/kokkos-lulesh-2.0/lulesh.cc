@@ -1,6 +1,7 @@
 
 #include <climits>
 #include <vector>
+#include <thread>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -499,7 +500,7 @@ static inline void CalcFBHourglassForceForElems(Domain &domain, Real_t *determ,
   Gamma G;
 
   Int_t do_atomic_dev = do_atomic;
-  
+
   Kokkos::parallel_for("CalcFBHourglassForceForElems A", numElem,
                        KOKKOS_LAMBDA(const int &i2) {
     Real_t *fx_local, *fy_local, *fz_local;
@@ -2079,7 +2080,14 @@ int main(int argc, char *argv[]) {
   myRank = 0;
 #endif
 
+#ifdef __APPLE__
+  Kokkos::InitArguments args;
+  args.num_threads = std::thread::hardware_concurrency();
+  args.tune_internals = true;
+  Kokkos::initialize(args);
+#else
   Kokkos::initialize();
+#endif
   {
   opts.its = 9999999;
   opts.nx = 30;

@@ -14,8 +14,8 @@ cmake -B build \
 -DKokkos_ARCH_NATIVE=ON \
 -DKokkos_ARCH_INTEL_DG1=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
--DWITH_KokkosKernels=ON \
--DKokkosKernels_ENABLE_EXAMPLES=ON \
+-DWITH_KokkosKernels=OFF \
+-DKokkosKernels_ENABLE_EXAMPLES=OFF \
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \
