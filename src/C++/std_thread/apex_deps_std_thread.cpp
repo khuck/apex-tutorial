@@ -36,6 +36,8 @@ int someThread(int tid, std::shared_ptr<apex::task_wrapper> parent)
     doWork();
     // call child function
     auto t = std::async(std::launch::async, foo, tid+1, task.get_task_wrapper());
+    // create a "fire and forget" thread
+    std::thread(foo, tid+1, task.get_task_wrapper()).detach();
     // stop timer while waiting on worker
     task.yield();
     int result = t.get();

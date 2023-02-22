@@ -36,6 +36,8 @@ int someThread(int tid)
     doWork();
     // call child function
     auto t = std::async(std::launch::async, foo, tid+1);
+    // create a "fire and forget" thread
+    std::thread(foo, tid+1).detach();
     // stop timer while waiting on worker
     task.yield();
     int result = t.get();
