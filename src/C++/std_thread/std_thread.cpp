@@ -12,15 +12,23 @@ void doWork(int scale = 1) {
     usleep(sleep_us * scale);
 }
 
-int foo(int tid) {
+int foo_body(int tid, const std::string& name) {
     static std::mutex mtx;
     {
         std::scoped_lock lock(mtx);
-        std::cout << __func__ << " : Thread " << tid << " working!" << std::endl;
+        std::cout << name << " : Thread " << tid << " working!" << std::endl;
     }
     // "do some work"
     doWork(tid);
     return 1;
+}
+
+int foo(int tid) {
+    return foo_body(tid, std::string(__func__));
+}
+
+int foo_detach(int tid) {
+    return foo_body(tid, std::string(__func__));
 }
 
 int someThread(int tid)
@@ -30,7 +38,7 @@ int someThread(int tid)
     // call child function
     auto t = std::async(std::launch::async, foo, tid+1);
     // create a "fire and forget" thread
-    std::thread(foo, tid+1).detach();
+    std::thread(foo_detach, tid+1).detach();
     // stop timer while waiting on worker
     int result = t.get();
     // "do some work"
