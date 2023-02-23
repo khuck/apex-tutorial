@@ -21,3 +21,4 @@ ctest --test-dir build
 
 For clues on which Kokkos architectures are available, see
 `kokkos/cmake/kokkos_arch.cmake`.
+(https://github.com/kokkos/kokkos/blob/master/cmake/kokkos_arch.cmake)
