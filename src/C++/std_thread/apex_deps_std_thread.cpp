@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "apex_api.hpp"
 
-const size_t nthreads{std::max<size_t>(8,std::thread::hardware_concurrency())};
+const size_t nthreads{std::min<size_t>(8,std::thread::hardware_concurrency())};
 
 void doWork(int scale = 1, std::shared_ptr<apex::task_wrapper> parent = nullptr) {
     auto task = apex::scoped_timer(__func__, parent);
