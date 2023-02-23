@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "std_thread.hpp"
 
-const size_t nthreads{std::thread::hardware_concurrency()};
+const size_t nthreads{std::max<size_t>(8,std::thread::hardware_concurrency())};
 
 void doWork(int scale = 1) {
     constexpr size_t sleep_us{10000};
