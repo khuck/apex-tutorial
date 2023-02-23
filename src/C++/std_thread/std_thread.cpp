@@ -12,7 +12,8 @@ void doWork(int scale = 1) {
     usleep(sleep_us * scale);
 }
 
-int foo_body(int tid, const std::string& name) {
+__attribute__((__no_instrument_function__))
+inline int foo_body(int tid, const std::string& name) {
     static std::mutex mtx;
     {
         std::scoped_lock lock(mtx);

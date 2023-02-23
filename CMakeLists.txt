@@ -40,6 +40,11 @@ add_custom_target(tests)
 add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
 
 add_subdirectory(src/C++/std_thread)
+if(OpenMP_FOUND)
+    add_subdirectory(src/C++/openmp)
+    add_subdirectory(src/C/openmp)
+endif()
+
 if (WITH_Kokkos)
     add_subdirectory(src/C++/kokkos)
     add_subdirectory(src/C++/kokkos-lulesh-2.0)
