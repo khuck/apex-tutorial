@@ -23,4 +23,4 @@ cmake -B build \
 
 # Build
 cmake --build build -j8
-ctest --test-dir build
+ctest --test-dir build --rerun-failed --output-on-failure
