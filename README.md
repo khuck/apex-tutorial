@@ -26,6 +26,16 @@ For clues on which Kokkos architectures are available, see
 # Example system build instructions:
 ## Lumi
 ```
+# load the AMD compilers
+module swap PrgEnv-cray PrgEnv-amd/8.3.3
+# load cmake
+ml CrayEnv
+ml buildtools/22.08
+# load python for analysis tools
+ml cray-python
+# load ROCm
+ml rocm
+
 export APEX_ROOT=$HOME/install/apex
 
 # clean up
