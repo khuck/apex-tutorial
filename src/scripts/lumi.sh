@@ -7,6 +7,10 @@ export APEX_ROOT=$HOME/install/apex
 # clean up
 rm -rf build
 
+export PE_PKGCONFIG_PRODUCTS=PE_MPICH
+export PE_PKGCONFIG_LIBS=mpich
+cc --cray-print-opts=all
+
 # Configure
 cmake -B build \
 -DWITH_KokkosKernels=OFF \

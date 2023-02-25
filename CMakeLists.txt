@@ -39,6 +39,7 @@ endif (WITH_Kokkos)
 add_custom_target(tests)
 add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
 
+add_subdirectory(src/C/pthread)
 add_subdirectory(src/C++/std_thread)
 if(OpenMP_FOUND)
     add_subdirectory(src/C++/openmp)

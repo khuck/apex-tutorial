@@ -1,0 +1,26 @@
+add_compile_options(-Wall -Wextra -pedantic -Werror)
+
+add_executable(pthread_c pthread.c)
+target_link_libraries (pthread_c pthread)
+add_dependencies (tests pthread_c)
+add_test (test_pthread_c pthread_c)
+
+add_executable(apex_pthread_c apex_pthread.c)
+target_link_libraries (apex_pthread_c ${LIBS} pthread)
+add_dependencies (tests apex_pthread_c)
+add_test (test_apex_pthread_c apex_pthread_c)
+
+add_executable(pthread_inst_c pthread.c)
+if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+    target_compile_options(pthread_inst_c PRIVATE "-finstrument-functions finstrument-functions-exclude-file-list=*.h,*.h")
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Intel")
+    target_compile_options(pthread_inst_c PRIVATE "-finstrument-functions")
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
+    target_compile_options(pthread_inst_c PRIVATE "-finstrument-functions-after-inlining")
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "NVHPC")
+    target_compile_options(pthread_inst_c PRIVATE "-Minstrument")
+endif()
+target_link_libraries (pthread_inst_c pthread)
+add_dependencies (tests pthread_inst_c)
+add_test (test_pthread_inst_c pthread_inst_c)
+
