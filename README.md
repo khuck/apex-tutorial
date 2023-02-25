@@ -37,6 +37,9 @@ ml cray-python
 ml rocm
 
 export APEX_ROOT=$HOME/install/apex
+# These settings help the (broken?) version of CMake on lumi find the Cray MPI flags when cc/CC/ftn are not the compilers 
+export PE_PKGCONFIG_PRODUCTS=PE_MPICH
+export PE_PKGCONFIG_LIBS=mpich
 
 # clean up
 rm -rf build
