@@ -8,9 +8,9 @@
 #define omp_get_max_threads() 1
 #endif
 
-#define NUM_CELLS 800000
-#define BLOCK_SIZE NUM_CELLS/100
-#define NUM_ITERATIONS 2000
+#define NUM_CELLS 1024*1024
+#define BLOCK_SIZE NUM_CELLS/1024
+#define NUM_ITERATIONS 20000
 #define UPDATE_INTERVAL NUM_ITERATIONS/100
 #define DIVIDE_METHOD 1
 #define MULTIPLY_METHOD 2
@@ -165,9 +165,10 @@ void solve_iteration(std::vector<double> * in_array, std::vector<double> * out_a
     } else {
 #pragma omp parallel num_threads(active_threads)
         {
-#pragma omp single
+//#pragma omp single
+#pragma omp for
             for (long j = 0; j < num_cells ; j += block_size) {
-#pragma omp task untied
+//#pragma omp task untied
                 solve_b(*in_array,*out_array,j,j+block_size);
             }
 // #pragma omp taskwait
@@ -198,14 +199,16 @@ void report_stats(void) {
  */
 int main (int argc, char ** argv) {
     apex::init("openmp test", 0, 1);
+    apex::apex_options::throttle_concurrency(true);
+    apex::apex_options::use_screen_output_detail(true);
     parse_arguments(argc, argv);
 
 #ifdef APEX_HAVE_ACTIVEHARMONY
-    int num_inputs = 3; // 2 for threads, block size; 3 for threads, block size, method
+    int num_inputs = 2; // 2 for threads, block size; 3 for threads, block size, method
     long * inputs[3] = {0L,0L,0L};
-    long mins[3] = {1,1,DIVIDE_METHOD};    // all minimums are 1
+    long mins[3] = {2,128,DIVIDE_METHOD};    // all minimums are 1
     long maxs[3] = {0,0,0};    // we'll set these later
-    long steps[3] = {1,1,1};   // all step sizes are 1
+    long steps[3] = {2,128,1};   // all step sizes are 1
     inputs[0] = &active_threads;
     inputs[1] = &block_size;
     inputs[2] = &method;
@@ -214,6 +217,8 @@ int main (int argc, char ** argv) {
     maxs[2] = MULTIPLY_METHOD;
     std::cout <<"Tuning Parameters:" << std::endl;
     std::cout <<"\tmins[0]: " << mins[0] << ", maxs[0]: " << maxs[0] << ", steps[0]: " << steps[0] << std::endl;
+    std::cout <<"\tmins[1]: " << mins[1] << ", maxs[1]: " << maxs[1] << ", steps[1]: " << steps[1] << std::endl;
+    std::cout <<"\tmins[2]: " << mins[2] << ", maxs[2]: " << maxs[2] << ", steps[2]: " << steps[2] << std::endl;
     my_custom_event = apex::register_custom_event("Perform Re-block");
     apex::setup_throughput_tuning((apex_function_address)solve_iteration,
                     APEX_MINIMIZE_ACCUMULATED, my_custom_event, num_inputs,
@@ -246,9 +251,9 @@ int main (int argc, char ** argv) {
             std::cout << "New thread count: " << active_threads;
             std::cout << ", New block size: " << block_size;
             std::cout << ", New method: " << method_names[method-1] << std::endl;
-            apex::sample_value("thread count", active_threads);
+            //apex::sample_value("thread count", active_threads);
             apex::sample_value("block size", block_size);
-            apex::sample_value("method", method);
+            //apex::sample_value("method", method);
         }
     }
     //dump_array(tmp);
