@@ -23,7 +23,7 @@ foreach(example_program ${example_programs})
         target_link_libraries (${example_program} OpenMP::OpenMP_CXX)
     endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "NVHPC")
     add_dependencies (tests ${example_program})
-    add_test ("test_${example_program}" ${example_program})
+    add_test (NAME "test_${example_program}" COMMAND ${example_program})
 endforeach()
 
     add_executable(openmp_1d_stencil 1d_stencil.cpp)

@@ -42,3 +42,6 @@ tasktree.txt
 *.dot
 *.json
 *.json.gz
+
+# Ctest output
+Testing

@@ -2,17 +2,23 @@
 
 export CXX=`which hipcc`
 export CC=`which amdclang`
-export APEX_ROOT=$HOME/install/apex
+export APEX_ROOT=$HOME/install/apex_lumi_nompi
 
 # clean up
 rm -rf build
 
+# So hipcc will do the right thing
+export HIPCC_COMPILE_FLAGS_APPEND="--offload-arch=gfx90a" # $(CC --cray-print-opts=cflags)"
+#export HIPCC_LINK_FLAGS_APPEND=$(CC --cray-print-opts=libs)
+
+# So CMake can find MPI
 export PE_PKGCONFIG_PRODUCTS=PE_MPICH
 export PE_PKGCONFIG_LIBS=mpich
 cc --cray-print-opts=all
 
 # Configure
 cmake -B build \
+-DWITH_Kokkos=OFF \
 -DWITH_KokkosKernels=OFF \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_HIP=ON \
