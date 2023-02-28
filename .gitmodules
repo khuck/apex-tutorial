@@ -4,3 +4,6 @@
 [submodule "kokkos-kernels"]
 	path = kokkos-kernels
 	url = https://github.com/kokkos/kokkos-kernels.git
+[submodule "perfstubs"]
+	path = perfstubs
+	url = git@github.com:UO-OACISS/perfstubs.git

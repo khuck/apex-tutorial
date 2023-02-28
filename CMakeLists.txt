@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.20.1) # Minimum required for CUDA
 project(Tutorial VERSION 1.0)
 
 option (WITH_Kokkos "Enable Kokkos examples" TRUE)
+option (WITH_PerfStubs "Enable PerfStubs examples" TRUE)
 option (WITH_KokkosKernels "Enable Kokkos Kernels examples" FALSE)
 
 # specify the C++ standard
@@ -28,8 +29,9 @@ set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
 
 enable_testing()
 
+include(cmake/AddGitSubmodule.cmake)
+add_git_submodule(perfstubs)
 if (WITH_Kokkos)
-    include(cmake/AddGitSubmodule.cmake)
     add_git_submodule(kokkos)
     if (WITH_KokkosKernels)
         add_git_submodule(kokkos-kernels)
