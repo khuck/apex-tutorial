@@ -9,7 +9,6 @@ rm -rf build
 
 # Configure
 cmake -B build \
--DKokkos_ENABLE_THREADS=ON \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ARCH_NATIVE=ON \

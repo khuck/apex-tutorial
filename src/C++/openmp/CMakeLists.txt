@@ -1,3 +1,4 @@
+if(WITH_TargetOffload)
 set(example_programs
     ompt_target_daxpy
     ompt_target_matmult
@@ -25,6 +26,7 @@ foreach(example_program ${example_programs})
     add_dependencies (tests ${example_program})
     add_test (NAME "test_${example_program}" COMMAND ${example_program})
 endforeach()
+endif(WITH_TargetOffload)
 
     add_executable(openmp_1d_stencil 1d_stencil.cpp)
     if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "NVHPC")
@@ -36,4 +38,4 @@ endforeach()
         target_link_libraries (openmp_1d_stencil ${LIBS} OpenMP::OpenMP_CXX)
     endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "NVHPC")
     add_dependencies (tests openmp_1d_stencil)
-    add_test ("test_openmp_1d_stencil" openmp_1d_stencil)
+    add_test (NAME "test_openmp_1d_stencil" COMMAND openmp_1d_stencil -c 100000 -b 1000 -i 1000)

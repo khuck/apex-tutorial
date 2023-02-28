@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.20.1) # Minimum required for CUDA
 project(Tutorial VERSION 1.0)
 
 option (WITH_Kokkos "Enable Kokkos examples" TRUE)
+option (WITH_TargetOffload "Enable OpenMP Target Offload examples" FALSE)
 option (WITH_PerfStubs "Enable PerfStubs examples" TRUE)
 option (WITH_KokkosKernels "Enable Kokkos Kernels examples" FALSE)
 
