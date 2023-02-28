@@ -10,6 +10,13 @@ target_link_libraries (apex_pthread_c ${LIBS} pthread)
 add_dependencies (tests apex_pthread_c)
 add_test (NAME test_apex_pthread_c COMMAND apex_pthread_c)
 
+if(WITH_PerfStubs)
+    add_executable(ps_pthread_c ps_pthread.c)
+    target_link_libraries (ps_pthread_c pthread perfstubs)
+    add_dependencies (tests ps_pthread_c)
+    add_test (NAME test_ps_pthread_c COMMAND ps_pthread_c)
+endif(WITH_PerfStubs)
+
 add_executable(pthread_inst_c pthread.c)
 if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
     target_compile_options(pthread_inst_c PRIVATE "-finstrument-functions finstrument-functions-exclude-file-list=*.h,*.h")

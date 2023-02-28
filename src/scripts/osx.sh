@@ -2,7 +2,8 @@
 
 export CXX=`which clang++`
 export CC=`which clang`
-export APEX_ROOT=$HOME/src/apex/install
+#export APEX_ROOT=$HOME/src/apex/install
+export APEX_ROOT=`spack location -i apex`
 
 # clean up
 rm -rf build
