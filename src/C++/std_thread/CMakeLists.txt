@@ -30,3 +30,10 @@ target_link_libraries (apex_deps_std_thread_cpp ${LIBS})
 add_dependencies (tests apex_deps_std_thread_cpp)
 add_test (NAME test_apex_deps_std_thread_cpp COMMAND apex_deps_std_thread_cpp)
 
+if(WITH_PerfStubs)
+    add_executable(ps_std_thread ps_std_thread.cpp)
+    target_link_libraries (ps_std_thread pthread perfstubs)
+    add_dependencies (tests ps_std_thread)
+    add_test (NAME test_ps_std_thread COMMAND ps_std_thread)
+endif(WITH_PerfStubs)
+
