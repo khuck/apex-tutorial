@@ -9,6 +9,7 @@ rm -rf build
 
 # Configure
 cmake -B build \
+-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ARCH_NATIVE=ON \
