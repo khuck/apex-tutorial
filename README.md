@@ -1,5 +1,6 @@
 # apex-tutorial
 Tutorial examples for APEX (https://github.com/UO-OACISS/apex)
+To follow the tutorial, see https://github.com/khuck/apex-tutorial/wiki
 
 This repository contains a number of examples for demonstrating
  - APEX model support
