@@ -26,6 +26,7 @@ For clues on which Kokkos architectures are available, see
 (https://github.com/kokkos/kokkos/blob/master/cmake/kokkos_arch.cmake)
 
 # Example system build instructions:
+For example configure/build scripts, see https://github.com/khuck/apex-tutorial/tree/main/src/scripts
 ## Lumi
 ```
 # load the AMD compilers
