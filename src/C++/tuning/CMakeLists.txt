@@ -1,4 +1,5 @@
 
+include_directories(${RAPIDJSON_INCLUDE_DIR})
 add_executable(custom_tuning custom_tuning.cpp)
 add_executable(tuning_request tuning_request.cpp)
 
@@ -33,7 +34,7 @@ if (OpenMP_FOUND)
     add_dependencies (tests policy_test)
     add_dependencies (tests apex_openmp_policy)
     add_dependencies (tests openmp_1d_stencil)
-    add_test (NAME "test_policy_test" COMMAND apex_exec policy_test)
+    add_test (NAME "test_policy_test" COMMAND policy_test 10)
     set_target_properties(apex_openmp_policy PROPERTIES OUTPUT_NAME apex_openmp_policy)
     add_test (NAME "test_openmp_1d_stencil" COMMAND openmp_1d_stencil -c 100000 -b 1000 -i 1000)
 else (OpenMP_FOUND)

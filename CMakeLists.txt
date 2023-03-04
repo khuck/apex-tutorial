@@ -41,6 +41,22 @@ if (WITH_Kokkos)
     endif (WITH_KokkosKernels)
 endif (WITH_Kokkos)
 
+include(GitExternal)
+git_external(rapidjson
+    https://github.com/miloyip/rapidjson.git
+    master
+    VERBOSE)
+
+set(RAPIDJSON_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/rapidjson/include)
+
+if(RAPIDJSON_INCLUDE_DIR)
+    message(INFO " Found rapidjson at ${RAPIDJSON_INCLUDE_DIR}")
+    include_directories(${RAPIDJSON_INCLUDE_DIR})
+else()
+    message(FATAL_ERROR " rapidjson not found. This should have been checked out automatically. "
+        "Try manually check out https://github.com/miloyip/rapidjson.git to ${PROJECT_SOURCE_DIR}")
+endif()
+
 add_custom_target(tests)
 add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
 
