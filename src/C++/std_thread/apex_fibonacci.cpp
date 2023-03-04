@@ -11,16 +11,12 @@ int fib (int in, std::shared_ptr<apex::task_wrapper> parent) {
     apex::scoped_thread st("fib thread");
     apex::scoped_timer ast((uint64_t)&fib,
         apex::apex_options::top_level_os_threads() ? nullptr : parent);
-    if (in == 0) {
-        return 0;
-    }
-    else if (in == 1) {
-        return 1;
-    }
+    if (in == 0) { return 0; }
+    else if (in == 1) { return 1; }
     int a = in-1;
     int b = in-2;
-    auto future_a = std::async(std::launch::async, fib, a, ast.get_task_wrapper());
-
+    auto future_a = std::async(std::launch::async, fib, a,
+        ast.get_task_wrapper());
     //ast.yield();
     int result_b = fib(b, ast.get_task_wrapper());
     int result_a = future_a.get();
@@ -30,12 +26,8 @@ int fib (int in, std::shared_ptr<apex::task_wrapper> parent) {
 }
 
 int main(int argc, char *argv[]) {
-    apex::init("apex_fibonacci_pthreads unit test", 0, 1);
-#ifdef APEX_HAVE_TAU
-    int i = 5;
-#else
+    apex::init(argv[0], 0, 1);
     int i = 10;
-#endif
 
     if (argc != 2) {
         std::cerr << "usage: " << argv[0] << " <integer value>" << std::endl;
