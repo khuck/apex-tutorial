@@ -37,3 +37,14 @@ if(WITH_PerfStubs)
     add_test (NAME test_ps_std_thread COMMAND ps_std_thread)
 endif(WITH_PerfStubs)
 
+add_executable(fibonacci_cpp fibonacci.cpp)
+target_link_libraries (fibonacci_cpp pthread)
+add_dependencies (tests fibonacci_cpp)
+add_test (NAME test_fibonacci_cpp COMMAND fibonacci_cpp)
+
+add_executable(apex_fibonacci_cpp apex_fibonacci.cpp)
+target_link_libraries (apex_fibonacci_cpp ${LIBS})
+add_dependencies (tests apex_fibonacci_cpp)
+add_test (NAME test_apex_fibonacci_cpp COMMAND apex_fibonacci_cpp)
+
+
