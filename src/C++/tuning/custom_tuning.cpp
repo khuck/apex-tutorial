@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <functional>
 #include "apex_api.hpp"
+#define APEX_HAVE_ACTIVEHARMONY 1
 
 apex_event_type my_custom_event = APEX_CUSTOM_EVENT_1;
 apex_event_type my_custom_event_2 = APEX_CUSTOM_EVENT_2;
