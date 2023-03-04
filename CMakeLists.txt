@@ -69,6 +69,7 @@ ENDIF("${isSystemDir}" STREQUAL "-1")
 
 add_subdirectory(src/C/pthread)
 add_subdirectory(src/C++/std_thread)
+add_subdirectory(src/C++/tuning)
 if(OpenMP_FOUND)
     add_subdirectory(src/C++/openmp)
     add_subdirectory(src/C/openmp)
