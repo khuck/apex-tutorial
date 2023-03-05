@@ -9,7 +9,7 @@ rm -rf build
 
 # Configure
 cmake -B build \
--DWITH_KokkosKernels=OFF \
+-DWITH_KokkosKernels=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_HIP=ON \
 -DKokkos_ENABLE_SERIAL=ON \
@@ -18,6 +18,7 @@ cmake -B build \
 -DKokkos_ENABLE_TUNING=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
+-DKokkosKernels_ENABLE_TESTS=ON \
 -DROCTX_ROOT=/opt/rocm-5.4.3/roctracer \
 
 

@@ -12,7 +12,7 @@ option (WITH_CUDA "Enable CUDA examples" FALSE)
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-add_compile_options(-Wall -Wextra -pedantic)
+#add_compile_options(-Wall -Wextra -pedantic)
 if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS
         "${CMAKE_EXE_LINKER_FLAGS} -force_flat_namespace -undefined dynamic_lookup")
