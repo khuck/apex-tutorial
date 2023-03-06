@@ -7,6 +7,7 @@ option (WITH_Kokkos "Enable Kokkos examples" TRUE)
 option (WITH_TargetOffload "Enable OpenMP Target Offload examples" FALSE)
 option (WITH_PerfStubs "Enable PerfStubs examples" TRUE)
 option (WITH_KokkosKernels "Enable Kokkos Kernels examples" FALSE)
+option (WITH_CUDA "Enable CUDA examples" FALSE)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -101,6 +102,11 @@ endif (WITH_Kokkos)
 find_package(ROCTX)
 if(ROCTX_FOUND)
     add_subdirectory(src/HIP)
+endif()
+
+find_package(CUDA)
+if(CUDA_FOUND)
+    add_subdirectory(src/CUDA)
 endif()
 
 if(MPI_FOUND)
