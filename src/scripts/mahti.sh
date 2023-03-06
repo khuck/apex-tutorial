@@ -19,6 +19,7 @@ cmake -B build \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=ON \
 -DCMAKE_CXX_STANDARD_LIBRARIES="-L/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64/stubs -lnvidia-ml" \
++-DCMAKE_C_STANDARD_LIBRARIES="-L/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64/stubs -lnvidia-ml" \
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \
