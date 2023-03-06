@@ -14,7 +14,11 @@ void doWork(int scale = 1, std::shared_ptr<apex::task_wrapper> parent = nullptr)
 }
 
 int foo_body(int tid, const std::string& name, std::shared_ptr<apex::task_wrapper> parent) {
-    auto task = apex::scoped_timer(name, parent);
+    // register the new thread with apex
+    std::string tname{"worker-thread"+std::to_string(tid)};
+    apex::register_thread(tname);
+    auto task = apex::scoped_timer(name,
+        apex::apex_options::top_level_os_threads() ? nullptr : parent);
     static std::mutex mtx;
     {
         std::scoped_lock lock(mtx);
@@ -39,7 +43,8 @@ int someThread(int tid, std::shared_ptr<apex::task_wrapper> parent)
     std::string name{"worker-thread"+std::to_string(tid)};
     apex::register_thread(name);
     // create a scoped timer
-    auto task = apex::scoped_timer(__func__, parent);
+    auto task = apex::scoped_timer(__func__,
+        apex::apex_options::top_level_os_threads() ? nullptr : parent);
     // "do some work"
     doWork();
     // call child function
