@@ -8,7 +8,7 @@ add_test (NAME test_std_thread_cpp COMMAND std_thread_cpp)
 
 add_executable(std_thread_inst_cpp std_thread.cpp)
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    target_compile_options(std_thread_inst_cpp PRIVATE -finstrument-functions finstrument-functions-exclude-file-list=*.h,*.hpp finstrument-functions-exclude-function-list=std::)
+    target_compile_options(std_thread_inst_cpp PRIVATE -finstrument-functions finstrument-functions-exclude-file-list=*.h,*.hpp -finstrument-functions-exclude-function-list=std::)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
     target_compile_options(std_thread_inst_cpp PRIVATE -finstrument-functions)
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")

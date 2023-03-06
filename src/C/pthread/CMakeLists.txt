@@ -19,7 +19,7 @@ endif(WITH_PerfStubs)
 
 add_executable(pthread_inst_c pthread.c)
 if ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
-    target_compile_options(pthread_inst_c PRIVATE -finstrument-functions finstrument-functions-exclude-file-list=*.h,*.h)
+    target_compile_options(pthread_inst_c PRIVATE -finstrument-functions -finstrument-functions-exclude-file-list=*.h,*.h)
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Intel")
     target_compile_options(pthread_inst_c PRIVATE -finstrument-functions)
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
