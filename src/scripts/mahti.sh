@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+module load papi
 export CXX=`which g++`
 export CC=`which gcc`
 export APEX_ROOT=$HOME/src/apex/install
