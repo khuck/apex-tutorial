@@ -1,15 +1,19 @@
 #!/bin/bash -e
 
+module load cuda/11.5.0 cmake
 module load papi
+module load APEX
 export CXX=`which g++`
 export CC=`which gcc`
-export APEX_ROOT=$HOME/src/apex/install
+export APEX_EXEC=`which apex_exec`
+export APEX_ROOT=$(dirname $(dirname ${APEX_EXEC}))
 
 # clean up
 rm -rf build
 
 # Configure
 cmake -B build \
+-DWITH_Kokkos=OFF \
 -DKokkos_ENABLE_TUNING=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_CUDA=ON \
@@ -22,10 +26,8 @@ cmake -B build \
 -DCMAKE_CXX_STANDARD_LIBRARIES="-L/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64/stubs -lnvidia-ml" \
 -DCMAKE_C_STANDARD_LIBRARIES="-L/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64/stubs -lnvidia-ml" \
 
-#-DCMAKE_CXX_COMPILER=`which amdclang++` \
-#-DCMAKE_C_COMPILER=`which amdclang` \
-#-DAPEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
-
 # Build
 cmake --build build -j
 ctest --test-dir build
+
+

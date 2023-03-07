@@ -1,0 +1,5 @@
+module load cuda/11.5.0
+module load cmake
+module load papi
+module load APEX
+module load python-data
