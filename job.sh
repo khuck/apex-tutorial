@@ -12,10 +12,12 @@
 # set the number of threads based on --cpus-per-task
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 # Bind OpenMP threads to hardware threads
-export OMP_PLACES=cores
+export OMP_PROC_BIND=close
+export OMP_PLACES=threads
 
 module load cuda/11.5.0 cmake papi APEX
 
+srun ./build/bin/pthread_c
+
 #srun ./build/bin/std_thread_cpp
-srun apex_exec --apex:pthread --apex:csv --apex:tasktree ./build/bin/std_thread_cpp
 
