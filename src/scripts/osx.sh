@@ -2,8 +2,8 @@
 
 export CXX=`which clang++`
 export CC=`which clang`
-#export APEX_ROOT=$HOME/src/apex/install
-export APEX_ROOT=`spack location -i apex`
+export APEX_ROOT=$HOME/src/apex/install
+#export APEX_ROOT=`spack location -i apex`
 
 # clean up
 rm -rf build
@@ -12,9 +12,11 @@ rm -rf build
 cmake -B build \
 -DKokkos_ENABLE_THREADS=ON \
 -DKokkos_ENABLE_SERIAL=ON \
+-DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ARCH_NATIVE=ON \
 -DKokkos_ARCH_INTEL_DG1=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
+-DWITH_Kokkos=OFF \
 -DWITH_KokkosKernels=OFF \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
 

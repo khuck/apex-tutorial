@@ -8,7 +8,7 @@
 
 if(NOT DEFINED $APEX_ROOT)
     if(DEFINED ENV{APEX_ROOT})
-        set(APEX_ROOT $ENV{APEX_ROOT})
+        set(APEX_ROOT $ENV{APEX_ROOT} CACHE STRING "Path to APEX installation" FORCE)
     endif()
 endif()
 
