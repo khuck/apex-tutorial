@@ -35,6 +35,11 @@ if(WITH_PerfStubs)
     target_link_libraries (ps_std_thread pthread perfstubs)
     add_dependencies (tests ps_std_thread)
     add_test (NAME test_ps_std_thread COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/ps_std_thread)
+    add_executable(apex_callstack_cpp apex_callstack.cpp)
+    target_link_libraries (apex_callstack_cpp pthread perfstubs)
+    add_dependencies (tests apex_callstack_cpp)
+    add_test (NAME test_apex_callstack_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/apex_callstack_cpp)
+
 endif(WITH_PerfStubs)
 
 add_executable(fibonacci_cpp fibonacci.cpp)
