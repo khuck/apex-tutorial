@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <omp.h>
+#include "unused.h"
 
 __attribute__((noinline)) void foo(void) {
 #pragma omp parallel
@@ -23,6 +24,8 @@ __attribute__((noinline)) void bar(void) {
 }
 
 int main (int argc, char** argv) {
+    UNUSED(argc);
+    UNUSED(argv);
     foo();
     bar();
     return 0;

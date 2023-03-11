@@ -1,12 +1,15 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <omp.h>
+#include "unused.h"
 
 /* Example taken from:
    https://computing.llnl.gov/tutorials/openMP/#REDUCTION
 */
 
 int main (int argc, char** argv) {
+    UNUSED(argc);
+    UNUSED(argv);
 	int   i, n;
  	double a[100], b[100], result;
 

@@ -21,7 +21,7 @@ int foo_body(int tid, const std::string& name, std::shared_ptr<apex::task_wrappe
         apex::apex_options::top_level_os_threads() ? nullptr : parent);
     static std::mutex mtx;
     {
-        std::scoped_lock lock(mtx);
+        std::unique_lock<std::mutex> lock(mtx);
         std::cout << name << " : Thread " << tid << " working!" << std::endl;
     }
     // "do some work"

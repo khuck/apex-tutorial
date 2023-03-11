@@ -17,7 +17,7 @@ int foo_body(int tid, const std::string& name) {
     auto task = apex::scoped_timer(name);
     static std::mutex mtx;
     {
-        std::scoped_lock lock(mtx);
+        std::unique_lock<std::mutex> lock(mtx);
         std::cout << name << " : Thread " << tid << " working!" << std::endl;
     }
     // "do some work"

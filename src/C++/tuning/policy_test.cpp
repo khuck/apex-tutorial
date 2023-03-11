@@ -12,7 +12,11 @@
 #include <time.h>
 #include <iostream>
 
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 int main (int argc, char *argv[]) {
+    UNUSED(argc);
+    UNUSED(argv);
 	int nthreads;
 
     int final_nthreads_1 = -1;

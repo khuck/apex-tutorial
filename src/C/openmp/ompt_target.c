@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include "unused.h"
 
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ) {
+    UNUSED(argc);
+    UNUSED(argv);
 
   double*   a = NULL;
   double*   b = NULL;

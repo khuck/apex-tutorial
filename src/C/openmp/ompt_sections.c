@@ -1,17 +1,20 @@
 #include <omp.h>
 #include <stdio.h>
+#include "unused.h"
 
-void a() {
+void a(void) {
     printf("in function a\n");
 }
-void b() {
+void b(void) {
     printf("in function b\n");
 }
-void c() {
+void c(void) {
     printf("in function c\n");
 }
 
-int main (void) {
+int main (int argc, char** argv) {
+    UNUSED(argc);
+    UNUSED(argv);
 #pragma omp parallel sections
     {
     #pragma omp section

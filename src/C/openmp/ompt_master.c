@@ -1,7 +1,10 @@
 #include <omp.h>
 #include <stdio.h>
+#include "unused.h"
 
-int main (void) {
+int main (int argc, char * argv[]) {
+    UNUSED(argc);
+    UNUSED(argv);
 	int a, i;
 #pragma omp parallel shared(a) private(i)
 	{

@@ -4,8 +4,10 @@
 #include <stdlib.h>
 #include <omp.h>
 
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 void daxpy( double * __restrict__ a, double * __restrict__ b,
-        double scalar, int num_elements ) {
+        double scalar, size_t num_elements ) {
 
 #pragma omp target teams distribute parallel for simd map(tofrom:a[0:num_elements]) map(to:b[0:num_elements])
       for (size_t j=0; j<num_elements; j++) {
@@ -17,12 +19,14 @@ void daxpy( double * __restrict__ a, double * __restrict__ b,
 
 int main( int argc, char** argv )
 {
+  UNUSED(argc);
+  UNUSED(argv);
   double*   a = NULL;
   double*   b = NULL;
   double*   c = NULL;
   double scalar = 8.0;
   int num_errors = 0;
-  int num_elements = 1024;
+  size_t num_elements = 1024;
 
   a = (double *) malloc( sizeof(double)*num_elements );
   b = (double *) malloc( sizeof(double)*num_elements );

@@ -1,19 +1,20 @@
 /******************************************************************************
 *   OpenMp Example - Matrix Multiply - C Version
-*   Demonstrates a matrix multiply using OpenMP. 
+*   Demonstrates a matrix multiply using OpenMP.
 *
 *   Modified from here:
 *   https://computing.llnl.gov/tutorials/openMP/samples/C/omp_mm.c
 *
-*   For  PAPI_FP_INS, the exclusive count for the event: 
+*   For  PAPI_FP_INS, the exclusive count for the event:
 *   for (null) [OpenMP location: file:matmult.c ]
-*   should be  2E+06 / Number of Threads 
+*   should be  2E+06 / Number of Threads
 ******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <omp.h>
 #include <math.h>
+#include "unused.h"
 
 int fib(int n) {
   int x,y;
@@ -30,9 +31,9 @@ int fibouter(int n) {
   int answer = 0;
   #pragma omp parallel shared(answer)
   {
-    #pragma omp single 
+    #pragma omp single
     {
-      #pragma omp task shared(answer) 
+      #pragma omp task shared(answer)
       {
 	    answer = fib(n);
       }
@@ -41,8 +42,9 @@ int fibouter(int n) {
   return answer;
 }
 
-int main (int argc, char *argv[]) 
-{
+int main (int argc, char *argv[]) {
+    UNUSED(argc);
+    UNUSED(argv);
   printf("Main...\n");
   fflush(stdout);
   printf ("\nDoing forking tasks..."); fflush(stdout);

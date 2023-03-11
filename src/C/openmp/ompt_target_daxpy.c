@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include "unused.h"
 
 void daxpy( double * __restrict__ a, double * __restrict__ b,
         double scalar, int num_elements ) {
@@ -15,8 +16,9 @@ void daxpy( double * __restrict__ a, double * __restrict__ b,
       return;
 }
 
-int main( int argc, char** argv )
-{
+int main( int argc, char** argv ) {
+    UNUSED(argc);
+    UNUSED(argv);
   double*   a = NULL;
   double*   b = NULL;
   double*   c = NULL;

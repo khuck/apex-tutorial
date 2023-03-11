@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include "unused.h"
 
 #define ARRAY_SIZE     512*512*512
 #define ITERATIONS     3
@@ -132,6 +133,8 @@ for (size_t j=0; j<ARRAY_SIZE; j++)
 
 
 int main( int argc, char** argv ) {
+    UNUSED(argc);
+    UNUSED(argv);
     run_cpu(argc, argv);
     run_gpu(argc, argv);
 }

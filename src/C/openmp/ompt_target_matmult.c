@@ -11,6 +11,7 @@
 ******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include "unused.h"
 
 #ifndef MATRIX_SIZE
 #define MATRIX_SIZE 512
@@ -146,8 +147,9 @@ float do_work(void) {
   return result;
 }
 
-int main (int argc, char *argv[])
-{
+int main (int argc, char *argv[]) {
+    UNUSED(argc);
+    UNUSED(argv);
   int i;
   for (i = 0 ; i < MAX_ITERATIONS ; i++) {
     printf("Iteration %d of %d:...\n", i, MAX_ITERATIONS);
