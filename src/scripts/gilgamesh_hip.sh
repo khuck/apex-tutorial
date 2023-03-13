@@ -11,7 +11,7 @@ rm -rf build
 set -x
 cmake -B build \
 -DWITH_KokkosKernels=OFF \
--DWITH_Kokkos=OFF \
+-DWITH_Kokkos=ON \
 -DWITH_HIP=ON \
 -DKokkos_ENABLE_OPENMP=ON \
 -DKokkos_ENABLE_HIP=ON \
