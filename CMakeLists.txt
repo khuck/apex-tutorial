@@ -26,16 +26,49 @@ else(APPLE)
 endif(APPLE)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-find_package(APEX REQUIRED)
+
 find_package(MPI) # optional
 find_package(OpenMP) # optional
+include(cmake/AddGitSubmodule.cmake)
+
+find_package(APEX)
+if (NOT APEX_FOUND)
+    include(cmake/AddGitSubmodule.cmake)
+    # Build Binutils as part of APEX
+    set(APEX_WITH_BFD TRUE CACHE BOOL "Include Binutils support for APEX")
+    set(APEX_BUILD_BFD TRUE CACHE BOOL "Build Binutils support for APEX")
+    # Build Tuning support as part of APEX
+    set(APEX_WITH_PLUGINS TRUE CACHE BOOL "Include Plugins support for APEX")
+    set(APEX_WITH_ACTIVEHARMONY TRUE CACHE BOOL "Include Active Harmony support for APEX")
+    set(APEX_BUILD_ACTIVEHARMONY TRUE CACHE BOOL "Build Active Harmony support for APEX")
+    # Include MPI support as part of APEX
+    if(MPI_FOUND)
+        set(APEX_WITH_MPI ${KokkosTools_ENABLE_MPI} CACHE BOOL "Include MPI support for APEX")
+    endif(MPI_FOUND)
+    # Include Device-specific support as part of APEX
+    if(WITH_CUDA)
+        set(APEX_WITH_CUDA TRUE CACHE BOOL "Include CUDA support for APEX")
+    endif(WITH_CUDA)
+    if(WITH_HIP)
+        set(APEX_WITH_HIP TRUE CACHE BOOL "Include HIP support for APEX")
+    endif(WITH_HIP)
+    if(WITH_LEVEL0)
+        set(APEX_WITH_LEVEL0 TRUE CACHE BOOL "Include LEVEL0 support for APEX")
+    endif(WITH_LEVEL0)
+    # Add openmp support as long as the compiler supports OMPT - definitely not GNU though.
+    if(OpenMP_FOUND)
+        if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+            set(APEX_WITH_OMPT TRUE CACHE BOOL "Include OpenMP support for APEX")
+        endif ("${CMAKE_CXX_COMPILER_ID}" NOT STREQUAL "GNU")
+    endif(OpenMP_FOUND)
+    add_git_submodule(apex)
+endif(NOT APEX_FOUND)
 
 include_directories(${APEX_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
 
 enable_testing()
 
-include(cmake/AddGitSubmodule.cmake)
 if (WITH_PerfStubs)
     add_git_submodule(perfstubs)
 endif (WITH_PerfStubs)
@@ -62,8 +95,8 @@ else()
         "Try manually check out https://github.com/miloyip/rapidjson.git to ${PROJECT_SOURCE_DIR}")
 endif()
 
-add_custom_target(tests)
-add_custom_command(TARGET tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
+add_custom_target(tutorial.tests)
+add_custom_command(TARGET tutorial.tests POST_BUILD COMMAND ctest -R test --output-on-failure --timeout 100)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

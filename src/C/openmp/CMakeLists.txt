@@ -22,7 +22,7 @@ foreach(example_program ${example_programs})
     else()
         target_link_libraries (${example_program} OpenMP::OpenMP_C stdc++)
     endif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "NVHPC")
-    add_dependencies (tests ${example_program})
+    add_dependencies (tutorial.tests ${example_program})
     add_test (NAME "test_${example_program}" COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/${example_program})
 endforeach()
 
