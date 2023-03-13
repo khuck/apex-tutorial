@@ -7,7 +7,9 @@ option (WITH_Kokkos "Enable Kokkos examples" TRUE)
 option (WITH_TargetOffload "Enable OpenMP Target Offload examples" FALSE)
 option (WITH_PerfStubs "Enable PerfStubs examples" TRUE)
 option (WITH_KokkosKernels "Enable Kokkos Kernels examples" FALSE)
+option (WITH_HIP "Enable HIP examples" FALSE)
 option (WITH_CUDA "Enable CUDA examples" FALSE)
+option (WITH_LEVEL0 "Enable LEVEL0 (OneAPI) examples" FALSE)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)
@@ -111,6 +113,10 @@ if (WITH_CUDA)
     if(CUDA_FOUND)
         add_subdirectory(src/CUDA)
     endif()
+endif()
+
+if (WITH_LEVEL0)
+    add_subdirectory(src/OneAPI)
 endif()
 
 if(MPI_FOUND)
