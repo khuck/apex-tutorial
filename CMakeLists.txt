@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20.1) # Minimum required for CUDA
 
 # set the project name and version
-project(Tutorial VERSION 1.0)
+project(Tutorial VERSION 1.0 LANGUAGES C CXX)
 
 option (WITH_Kokkos "Enable Kokkos examples" TRUE)
 option (WITH_TargetOffload "Enable OpenMP Target Offload examples" FALSE)
@@ -99,14 +99,18 @@ if (WITH_Kokkos)
     add_subdirectory(src/C++/kokkos-lulesh-2.0)
 endif (WITH_Kokkos)
 
+if (WITH_HIP)
 find_package(ROCTX)
 if(ROCTX_FOUND)
     add_subdirectory(src/HIP)
 endif()
+endif (WITH_HIP)
 
-find_package(CUDA)
-if(CUDA_FOUND)
-    add_subdirectory(src/CUDA)
+if (WITH_CUDA)
+    find_package(CUDA)
+    if(CUDA_FOUND)
+        add_subdirectory(src/CUDA)
+    endif()
 endif()
 
 if(MPI_FOUND)
