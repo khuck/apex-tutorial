@@ -31,7 +31,7 @@ find_package(MPI) # optional
 find_package(OpenMP) # optional
 include(cmake/AddGitSubmodule.cmake)
 
-find_package(APEX)
+find_package(APEX REQUIRED)
 if (NOT APEX_FOUND)
     include(cmake/AddGitSubmodule.cmake)
     # Build Binutils as part of APEX
@@ -64,8 +64,8 @@ if (NOT APEX_FOUND)
     add_git_submodule(apex)
 endif(NOT APEX_FOUND)
 
-include_directories(${APEX_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
+#include_directories(${APEX_INCLUDE_DIRS})
+#set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
 
 enable_testing()
 
@@ -156,4 +156,32 @@ if(MPI_FOUND)
     message(STATUS "Run: ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} ${MPIEXEC_MAX_NUMPROCS} ${MPIEXEC_PREFLAGS} EXECUTABLE ${MPIEXEC_POSTFLAGS} ARGS")
     add_subdirectory(src/C++/MPI)
 endif(MPI_FOUND)
+
+function(dump_cmake_variables)
+    get_cmake_property(_variableNames VARIABLES)
+    list (SORT _variableNames)
+    foreach (_variableName ${_variableNames})
+        if (ARGV0)
+            unset(MATCHED)
+            string(REGEX MATCH ${ARGV0} MATCHED ${_variableName})
+            if (NOT MATCHED)
+                continue()
+            endif()
+        endif()
+        message(STATUS "${_variableName} = ${${_variableName}}")
+    endforeach()
+endfunction()
+
+message(STATUS "----------------------------------------------------------------------")
+message(STATUS "APEX Variable Report:")
+message(STATUS "----------------------------------------------------------------------")
+dump_cmake_variables("^APEX")
+MESSAGE(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
+MESSAGE(STATUS "Libraries: " ${LIBS})
+MESSAGE(STATUS "Compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
+MESSAGE(STATUS "Compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
+MESSAGE(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
+MESSAGE(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
+MESSAGE(STATUS "Install Prefix:" ${CMAKE_INSTALL_PREFIX})
+message(STATUS "----------------------------------------------------------------------")
 

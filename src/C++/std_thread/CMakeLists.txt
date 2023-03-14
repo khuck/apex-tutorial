@@ -21,12 +21,12 @@ add_dependencies (tutorial.tests std_thread_inst_cpp)
 add_test (NAME test_std_thread_inst_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/std_thread_inst_cpp)
 
 add_executable(apex_std_thread_cpp apex_std_thread.cpp)
-target_link_libraries (apex_std_thread_cpp ${LIBS} stdc++)
+target_link_libraries (apex_std_thread_cpp APEX::apex stdc++)
 add_dependencies (tutorial.tests apex_std_thread_cpp)
 add_test (NAME test_apex_std_thread_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/apex_std_thread_cpp)
 
 add_executable(apex_deps_std_thread_cpp apex_deps_std_thread.cpp)
-target_link_libraries (apex_deps_std_thread_cpp ${LIBS} stdc++)
+target_link_libraries (apex_deps_std_thread_cpp APEX::apex stdc++)
 add_dependencies (tutorial.tests apex_deps_std_thread_cpp)
 add_test (NAME test_apex_deps_std_thread_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/apex_deps_std_thread_cpp)
 
@@ -48,7 +48,7 @@ add_dependencies (tutorial.tests fibonacci_cpp)
 add_test (NAME test_fibonacci_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/fibonacci_cpp)
 
 add_executable(apex_fibonacci_cpp apex_fibonacci.cpp)
-target_link_libraries (apex_fibonacci_cpp ${LIBS} stdc++)
+target_link_libraries (apex_fibonacci_cpp APEX::apex stdc++)
 add_dependencies (tutorial.tests apex_fibonacci_cpp)
 add_test (NAME test_apex_fibonacci_cpp COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/apex_fibonacci_cpp)
 

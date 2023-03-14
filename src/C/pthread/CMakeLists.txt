@@ -6,7 +6,7 @@ add_dependencies (tutorial.tests pthread_c)
 add_test (NAME test_pthread_c COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/pthread_c)
 
 add_executable(apex_pthread_c apex_pthread.c)
-target_link_libraries (apex_pthread_c ${LIBS} pthread stdc++)
+target_link_libraries (apex_pthread_c APEX::apex pthread stdc++)
 add_dependencies (tutorial.tests apex_pthread_c)
 add_test (NAME test_apex_pthread_c COMMAND ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/apex_pthread_c)
 

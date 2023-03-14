@@ -8,7 +8,7 @@
 add_executable (lulesh_MPI_OpenMP_2.0 lulesh.cc lulesh-comm.cc lulesh-init.cc lulesh-util.cc lulesh-viz.cc  synchronous_policy.cpp)
 
 # Link the executable
-target_link_libraries(lulesh_MPI_OpenMP_2.0 PUBLIC ${LIBS} MPI::MPI_CXX OpenMP::OpenMP_CXX stdc++)
+target_link_libraries(lulesh_MPI_OpenMP_2.0 PUBLIC APEX::apex MPI::MPI_CXX OpenMP::OpenMP_CXX stdc++)
 
 #add_test (test_lulesh_MPI_OpenMP_2.0 ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 8
 #      ${MPIEXEC_PREFLAGS} ${APEX_ROOT}/bin/apex_exec ${CMAKE_BINARY_DIR}/bin/lulesh_MPI_OpenMP_2.0 -p -i 100
