@@ -31,7 +31,20 @@ find_package(MPI) # optional
 find_package(OpenMP) # optional
 include(cmake/AddGitSubmodule.cmake)
 
+if(NOT DEFINED $APEX_ROOT)
+    if(DEFINED ENV{APEX_ROOT})
+        message("   env APEX_ROOT is defined as $ENV{APEX_ROOT}")
+        set(APEX_ROOT $ENV{APEX_ROOT} CACHE STRING "Path to APEX installation")
+    elseif(DEFINED $APEX_PATH)
+        message("   APEX_ROOT is defined as ${APEX_PATH}")
+        set(APEX_ROOT ${APEX_PATH} CACHE STRING "Path to APEX installation")
+    elseif(DEFINED $APEX_DIR)
+        message("   APEX_ROOT is defined as ${APEX_DIR}")
+        set(APEX_ROOT ${APEX_DIR} CACHE STRING "Path to APEX installation")
+    endif()
+endif()
 find_package(APEX REQUIRED)
+
 #[[
 if (NOT APEX_FOUND)
     include(cmake/AddGitSubmodule.cmake)
