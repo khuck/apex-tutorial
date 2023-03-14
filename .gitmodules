@@ -7,6 +7,3 @@
 [submodule "perfstubs"]
 	path = perfstubs
 	url = https://github.com/UO-OACISS/perfstubs.git
-[submodule "apex"]
-	path = apex
-	url = https://github.com/UO-OACISS/apex.git
