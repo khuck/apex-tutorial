@@ -32,6 +32,7 @@ find_package(OpenMP) # optional
 include(cmake/AddGitSubmodule.cmake)
 
 find_package(APEX REQUIRED)
+#[[
 if (NOT APEX_FOUND)
     include(cmake/AddGitSubmodule.cmake)
     # Build Binutils as part of APEX
@@ -63,10 +64,7 @@ if (NOT APEX_FOUND)
     endif(OpenMP_FOUND)
     add_git_submodule(apex)
 endif(NOT APEX_FOUND)
-
-#include_directories(${APEX_INCLUDE_DIRS})
-#set(LIBS ${LIBS} ${APEX_LIBRARIES} pthread)
-
+]]
 enable_testing()
 
 if (WITH_PerfStubs)

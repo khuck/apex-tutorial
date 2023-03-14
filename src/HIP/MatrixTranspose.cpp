@@ -25,7 +25,7 @@ THE SOFTWARE.
 // hip header file
 #include <hip/hip_runtime.h>
 // roctx header file
-#include <roctx.h>
+#include <roctracer/roctx.h>
 // openmp header file
 #include <omp.h>
 
