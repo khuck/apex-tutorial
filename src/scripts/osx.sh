@@ -10,15 +10,15 @@ rm -rf build
 
 # Configure
 cmake -B build \
+-DWITH_TargetOffload=ON \
+-DWITH_Kokkos=OFF \
+-DWITH_KokkosKernels=OFF \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ENABLE_THREADS=ON \
 -DKokkos_ENABLE_OPENMP=OFF \
 -DKokkos_ARCH_NATIVE=ON \
 -DKokkos_ARCH_INTEL_DG1=ON \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
--DWITH_TargetOffload=ON \
--DWITH_Kokkos=ON \
--DWITH_KokkosKernels=OFF \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
 
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
