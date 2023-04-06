@@ -12,8 +12,9 @@ option (WITH_CUDA "Enable CUDA examples" FALSE)
 option (WITH_LEVEL0 "Enable LEVEL0 (OneAPI) examples" FALSE)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 #add_compile_options(-Wall -Wextra -pedantic)
 #if(APPLE)
 #    set(CMAKE_EXE_LINKER_FLAGS
@@ -160,6 +161,7 @@ if (WITH_CUDA)
 endif()
 
 if (WITH_LEVEL0)
+    add_git_submodule_nobuild(oneAPI-samples)
     add_subdirectory(src/OneAPI)
 endif()
 

@@ -7,3 +7,7 @@
 [submodule "perfstubs"]
 	path = perfstubs
 	url = https://github.com/UO-OACISS/perfstubs.git
+[submodule "oneAPI-samples"]
+	path = oneAPI-samples
+	url = https://github.com/oneapi-src/oneAPI-samples.git
+	branch = master
