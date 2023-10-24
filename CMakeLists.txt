@@ -12,7 +12,7 @@ option (WITH_CUDA "Enable CUDA examples" FALSE)
 option (WITH_LEVEL0 "Enable LEVEL0 (OneAPI) examples" FALSE)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 #add_compile_options(-Wall -Wextra -pedantic)
 if(APPLE)

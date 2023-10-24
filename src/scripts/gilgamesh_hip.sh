@@ -2,7 +2,7 @@
 
 export CXX=`which hipcc`
 export CC=`which amdclang`
-export APEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
+export APEX_ROOT=$HOME/src/apex/install_gilgamesh_5.5.3
 
 # clean up
 rm -rf build
@@ -22,12 +22,12 @@ cmake -B build \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=OFF \
 -DKokkosKernels_ENABLE_TESTS=ON \
--DROCTX_ROOT=/opt/rocm-5.2.0/roctracer \
+-DROCTX_ROOT=/opt/rocm-5.5.3/roctracer \
 
 set +x
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \
-#-DAPEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
+#-DAPEX_ROOT=$HOME/src/apex/install_gilgamesh_5.2.0
 
 # Build
 cmake --build build -j16
