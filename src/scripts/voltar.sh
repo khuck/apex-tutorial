@@ -2,7 +2,7 @@
 
 export CXX=`which nvc++`
 export CC=`which nvc`
-export APEX_ROOT=$HOME/src/apex/install_voltar_cuda_11.8
+#export APEX_ROOT=$HOME/src/apex/install_voltar_cuda_11.8
 
 # clean up
 rm -rf build

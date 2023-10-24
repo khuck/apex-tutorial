@@ -31,8 +31,7 @@ find_package(MPI) # optional
 find_package(OpenMP) # optional
 include(cmake/AddGitSubmodule.cmake)
 
-find_package(APEX REQUIRED)
-#[[
+find_package(APEX)
 if (NOT APEX_FOUND)
     include(cmake/AddGitSubmodule.cmake)
     # Build Binutils as part of APEX
@@ -60,10 +59,11 @@ if (NOT APEX_FOUND)
     if(OpenMP_FOUND)
         if (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
             set(APEX_WITH_OMPT TRUE CACHE BOOL "Include OpenMP support for APEX")
-        endif ("${CMAKE_CXX_COMPILER_ID}" NOT STREQUAL "GNU")
+        endif (NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     endif(OpenMP_FOUND)
     add_git_submodule(apex)
 endif(NOT APEX_FOUND)
+#[[
 ]]
 enable_testing()
 
