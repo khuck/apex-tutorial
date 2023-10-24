@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
   const team_policy policy(1, 6); // 1 team with 6 threads
 
   Kokkos::parallel_for(
+      "outer",
       policy,
       KOKKOS_LAMBDA(const team_member &thread) {
         const int team_rank = thread.team_rank();
