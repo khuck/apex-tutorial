@@ -84,12 +84,6 @@ enable_testing()
 if (WITH_PerfStubs)
     add_git_submodule(perfstubs)
 endif (WITH_PerfStubs)
-if (WITH_Kokkos)
-    add_git_submodule(kokkos)
-    if (WITH_KokkosKernels)
-        add_git_submodule(kokkos-kernels)
-    endif (WITH_KokkosKernels)
-endif (WITH_Kokkos)
 
 include(GitExternal)
 git_external(rapidjson
@@ -141,10 +135,25 @@ if(OpenMP_FOUND)
     add_subdirectory(src/C/openmp)
 endif()
 
-if (WITH_Kokkos)
+################################################################################
+# Kokkos configuration
+################################################################################
+
+if(WITH_Kokkos)
+    message(INFO " Checking for Kokkos installation in $Kokkos_ROOT...")
+    find_package(Kokkos)
+    if (Kokkos_FOUND)
+        message(INFO " Using Kokkos include: ${Kokkos_INCLUDE_DIR}/impl")
+    else()
+        message(INFO " Kokkos not found, cloning submodule to get required headers.")
+        add_git_submodule(kokkos)
+    endif()
     add_subdirectory(src/C++/kokkos)
     add_subdirectory(src/C++/kokkos-lulesh-2.0)
-endif (WITH_Kokkos)
+    if (WITH_KokkosKernels)
+        add_git_submodule(kokkos-kernels)
+    endif (WITH_KokkosKernels)
+endif(WITH_Kokkos)
 
 if (WITH_HIP)
 find_package(ROCTX)

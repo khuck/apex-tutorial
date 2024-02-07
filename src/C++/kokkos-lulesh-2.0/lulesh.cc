@@ -2080,14 +2080,7 @@ int main(int argc, char *argv[]) {
   myRank = 0;
 #endif
 
-#ifdef __APPLE__
-  Kokkos::InitArguments args;
-  args.num_threads = std::thread::hardware_concurrency();
-  args.tune_internals = true;
-  Kokkos::initialize(args);
-#else
   Kokkos::initialize();
-#endif
   {
   opts.its = 9999999;
   opts.nx = 30;

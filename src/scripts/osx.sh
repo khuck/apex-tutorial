@@ -1,9 +1,12 @@
 #!/bin/bash -e
 
+source /Users/khuck/spack/share/spack/setup-env.sh
+spack load cmake kokkos apex
 export CXX=`which clang++`
 export CC=`which clang`
 #export APEX_ROOT=$HOME/src/apex/install_minimal
 export APEX_ROOT=`spack location -i apex`
+export Kokkos_ROOT=`spack location -i kokkos`
 
 # clean up
 rm -rf build
@@ -12,7 +15,8 @@ rm -rf build
 cmake -B build \
 -DWITH_TargetOffload=OFF \
 -DWITH_Kokkos=ON \
--DWITH_KokkosKernels=ON \
+-DKokkos_ROOT=${Kokkos_ROOT} \
+-DWITH_KokkosKernels=OFF \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ENABLE_THREADS=ON \
 -DKokkos_ENABLE_OPENMP=OFF \
