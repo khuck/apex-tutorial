@@ -15,7 +15,6 @@ rm -rf build
 cmake -B build \
 -DWITH_TargetOffload=OFF \
 -DWITH_Kokkos=ON \
--DKokkos_ROOT=${Kokkos_ROOT} \
 -DWITH_KokkosKernels=OFF \
 -DKokkos_ENABLE_SERIAL=ON \
 -DKokkos_ENABLE_THREADS=ON \
@@ -25,6 +24,7 @@ cmake -B build \
 -DKokkos_ENABLE_AGGRESSIVE_VECTORIZATION=ON \
 -DKokkosKernels_ENABLE_EXAMPLES=ON \
 
+#-DKokkos_ROOT=${Kokkos_ROOT} \
 #-DCMAKE_CXX_COMPILER=`which amdclang++` \
 #-DCMAKE_C_COMPILER=`which amdclang` \
 #-DAPEX_ROOT=$HOME/src/xpress-apex/install_gilgamesh_5.2.0
